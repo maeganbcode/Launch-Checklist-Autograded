@@ -1,4 +1,4 @@
-// Write your helper functions here!
+
 
 require('cross-fetch/polyfill');
 
@@ -18,40 +18,53 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
-
     if (testInput === "") {
         return "Empty";
-    }
-
- } else if  (!isNaN(testInput)) {
-        return "Is a Number";
-    
+ } else if (!isNaN(testInput)) {
+        return "Is a Number";    
  } else {
         return "Not a Number";
  }
 }
+
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
-    const pilotStatus = document.getElementById("pilotName");
-    const coPilotStatus = document.getElementById("coPilotName");
-    const fuelLevelStatus = document.getElementById("fuelLevel");
-    const cargoMassStatus = document.getElementById("cargoMass");
-
+    const pilotStatus = document.getElementById("pilotStatus");
+    const copilotStatus = document.getElementById("coPilotStatus");
+    const fuelLevelStatus = document.getElementById("fuelLevelStatus");
+    const cargoMassStatus = document.getElementById("cargoMassStatus");
+    
     if (validateInput(pilot) === "Empty" ||
-        validateInput(coPilot) === "Empty" ||
+        validateInput(copilot) === "Empty" ||
         validateInput(fuelLevel) === "Empty" ||
         validateInput(cargoMass) === "Empty") {
             alert("all fields are required!");  
+
+         } else if  (validateInput(pilot) === "Is a Number" ||
+              validateInput(copilot) === "Is a Number") {
+              alert("Names should not include numbers!");
         
-        }
-    } else if (validateInput(fuelLevel) === "Not a Number" ||
+               } else if  (validateInput(fuelLevel) === "Not a Number" ||
                 validateInput(cargoMass) === "Not a Number") {
-                    alert("Please enter a number!");
-    } else if  (validateInput(pilot) === "Is a Number" ||
-                validateInput(coPilot) === "Is a Number") {
-                    alert("Names should not include numbers!");
-                }
+                    alert("Please enter a valid number!");
+                
+             } else {
+                list.style.visibility = "visible";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready`;
+
+             }}
+
+             if (fuelLevel < 100000) {
+                faultyItems.style.visibility = "visible";
+                fuelLevelStatus.innerHTML = "Not enough fuel for the journey."
+                launchStatus.innerHTML = "Shuttle not ready for launch";
+                launchStatus.color= "red";
+             }
+
+             if(cargoMass > 10000) {
+
 
 
 
