@@ -3,18 +3,20 @@
 require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    // Here is the HTML formatting for our mission target div.
-    /*
+    let missionTarget = document.getElementById("missionTarget");
+    missionTarget.innerHTML = 
+     
+    `
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name}</li>
+                     <li>Diameter: ${diameter} </li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance} </li>
+                     <li>Number of Moons: ${moons} </li>
                  </ol>
-                 <img src="">
-    */
+                 <img src="${imageUrl}">
+    `
  }
  
  function validateInput(testInput) {
@@ -31,7 +33,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
     const pilotStatus = document.getElementById("pilotStatus");
-    const copilotStatus = document.getElementById("coPilotStatus");
+    const copilotStatus = document.getElementById("copilotStatus");
     const fuelLevelStatus = document.getElementById("fuelLevelStatus");
     const cargoMassStatus = document.getElementById("cargoMassStatus");
     
@@ -58,32 +60,36 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
              if (fuelLevel < 100000) {
                 faultyItems.style.visibility = "visible";
-                fuelLevelStatus.innerHTML = "Not enough fuel for the journey."
-                launchStatus.innerHTML = "Shuttle not ready for launch";
+                fuelLevelStatus.innerHTML = `Fuel level ${fuelLevel} too low for launch`;
+                launchStatus.innerHTML = "Shuttle Not Ready for Launch";
                 launchStatus.color= "red";
-             }
+             
 
-             if(cargoMass > 10000) {
+             } else if(cargoMass > 100000) {
+                faultyItems.style.visibility = "visible";
+                cargoMassStatus.innerHTML = "Cargo mass too heavy for launch";
+                launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+                launchStatus.color= "red";
 
+             } else {
+                launchStatus.color= "green";
+                launchStatus.innerHTML = "Shuttle is Ready for Launch";
 
-
-
-
-     
-   
-
+             }     
     
  
  async function myFetch() {
-     let planetsReturned;
- 
-     planetsReturned = await fetch().then( function(response) {
-         });
- 
+    
+    let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        return response.json();
+     });
+          
      return planetsReturned;
  }
  
  function pickPlanet(planets) {
+    let randomPlanet = Math.floor(Math.random() * 6) + 1;
+    return randomPlanet;
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
