@@ -34,8 +34,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     const pilotStatus = document.getElementById("pilotStatus");
     const copilotStatus = document.getElementById("copilotStatus");
-    const fuelLevelStatus = document.getElementById("fuelLevelStatus");
-    const cargoMassStatus = document.getElementById("cargoMassStatus");
+    const fuelLevelStatus = document.getElementById("fuelStatus");
+    const cargoMassStatus = document.getElementById("cargoStatus");
     
     if (validateInput(pilot) === "Empty" ||
         validateInput(copilot) === "Empty" ||
@@ -58,20 +58,20 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
              
              if (fuelLevel < 100000) {
-                faultyItems.style.visibility = "visible";
-                fuelLevelStatus.innerHTML = `Fuel level ${fuelLevel} too low for launch`;
+                list.style.visibility = "visible";
+                fuelStatus.innerHTML = "Fuel level too low for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-                launchStatus.color= "red";
+                launchStatus.style.color= "red";
              
 
              } else if(cargoMass > 100000) {
-                faultyItems.style.visibility = "visible";
-                cargoMassStatus.innerHTML = "Cargo mass too heavy for launch";
+                list.style.visibility = "visible";
+                cargoStatus.innerHTML = "Cargo mass too heavy for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-                launchStatus.color= "red";
+                launchStatus.style.color= "red";
 
              } else {
-                launchStatus.color= "green";
+                launchStatus.style.color= "green";
                 launchStatus.innerHTML = "Shuttle is Ready for Launch";
 
              } 
