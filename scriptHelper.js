@@ -34,8 +34,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     const pilotStatus = document.getElementById("pilotStatus");
     const copilotStatus = document.getElementById("copilotStatus");
-    const fuelLevelStatus = document.getElementById("fuelStatus");
-    const cargoMassStatus = document.getElementById("cargoStatus");
+    const fuelStatus = document.getElementById("fuelStatus");
+    const cargoStatus = document.getElementById("cargoStatus");
+    const launchStatus = document.getElementById("launchStatus");
     
     if (validateInput(pilot) === "Empty" ||
         validateInput(copilot) === "Empty" ||
@@ -52,34 +53,61 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                     alert("Please enter a valid number!");
                 
              } else {
-                list.style.visibility = "visible";
-                pilotStatus.innerHTML = `Pilot ${pilot} is ready`;
-                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready`;
+                list.style.visibility = "hidden";
+                launchStatus.innerHTML = "Awaiting Information Before Launch";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+                fuelStatus.innerHTML = "Fuel level high enough for launch";
+                cargoStatus.innerHTML = "Cargo mass low enough for launch";
 
              
              if (fuelLevel < 100000) {
                 list.style.visibility = "visible";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
                 fuelStatus.innerHTML = "Fuel level too low for launch";
+                cargoStatus.innerHTML = "Cargo mass low enough for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
                 launchStatus.style.color= "red";
-             
 
-             } else if(cargoMass > 100000) {
+             } else if (cargoMass > 100000) {
                 list.style.visibility = "visible";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+                fuelStatus.innerHTML = "Fuel level high enough for launch";
                 cargoStatus.innerHTML = "Cargo mass too heavy for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-                launchStatus.style.color= "red";
-
-             } else {
-                launchStatus.style.color= "green";
+                launchStatus.style.color= "red";                     
+                
+            } else if(cargoMass < 100000 && fuelLevel < 100000) {
+                list.style.visibility = "visible";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+                fuelStatus.innerHTML = "Fuel level too low for launch";                
+                cargoStatus.innerHTML = "Cargo mass low enough for launch";
+                launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+                launchStatus.style.color = "red";
+        
+            } else {
+                list.style.visibility = "visible";
+                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+                fuelStatus.innerHTML = "Fuel level high enough for launch";
+                cargoStatus.innerHTML = "Cargo mass low enough for launch";
                 launchStatus.innerHTML = "Shuttle is Ready for Launch";
-
-             } 
+                launchStatus.style.color = "green";
             }
-        }    
-    
- 
- async function myFetch() {
+        }
+    }           
+          
+        
+  
+               
+                         
+           
+        
+  
+  async function myFetch() {
     
     let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
         return response.json();
