@@ -56,8 +56,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 pilotStatus.innerHTML = `Pilot ${pilot} is ready`;
                 copilotStatus.innerHTML = `Co-pilot ${copilot} is ready`;
 
-             }}
-
+             
              if (fuelLevel < 100000) {
                 faultyItems.style.visibility = "visible";
                 fuelLevelStatus.innerHTML = `Fuel level ${fuelLevel} too low for launch`;
@@ -75,7 +74,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 launchStatus.color= "green";
                 launchStatus.innerHTML = "Shuttle is Ready for Launch";
 
-             }     
+             } 
+            }
+        }    
     
  
  async function myFetch() {
@@ -88,8 +89,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function pickPlanet(planets) {
-    let randomPlanet = Math.floor(Math.random() * 6) + 1;
-    return randomPlanet;
+    let randomPlanet = Math.floor(Math.random() * planets.length);
+    return planets[randomPlanet];
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
