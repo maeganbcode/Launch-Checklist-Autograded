@@ -42,26 +42,30 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         validateInput(copilot) === "Empty" ||
         validateInput(fuelLevel) === "Empty" ||
         validateInput(cargoMass) === "Empty") {
-            alert("all fields are required!");  
+            alert("all fields are required!");
+        }  
+            
 
-         } else if  (validateInput(pilot) === "Is a Number" ||
+         if  (validateInput(pilot) === "Is a Number" ||
               validateInput(copilot) === "Is a Number") {
               alert("Names should not include numbers!");
+              }
         
-               } else if  (validateInput(fuelLevel) === "Not a Number" ||
-                validateInput(cargoMass) === "Not a Number") {
-                    alert("Please enter a valid number!");
+         if  (validateInput(fuelLevel) === "Not a Number" ||
+              validateInput(cargoMass) === "Not a Number") {
+              alert("Please enter a valid number!");
+              }
                 
-             } else {
-                list.style.visibility = "hidden";
-                launchStatus.innerHTML = "Awaiting Information Before Launch";
-                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
-                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-                fuelStatus.innerHTML = "Fuel level high enough for launch";
-                cargoStatus.innerHTML = "Cargo mass low enough for launch";
-
              
-             if (fuelLevel < 100000) {
+                 list.style.visibility = "hidden";
+                 launchStatus.innerHTML = "Awaiting Information Before Launch";
+                 pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+                 copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+                 fuelStatus.innerHTML = "Fuel level high enough for launch";
+                 cargoStatus.innerHTML = "Cargo mass low enough for launch";
+             
+             
+             if (fuelLevel < 10000) {
                 list.style.visibility = "visible";
                 pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
                 copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
@@ -69,26 +73,30 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 cargoStatus.innerHTML = "Cargo mass low enough for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
                 launchStatus.style.color= "red";
+             }
+             
 
-             } else if (cargoMass > 100000) {
+             
+            if (cargoMass > 10000) {
                 list.style.visibility = "visible";
                 pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
                 copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
                 fuelStatus.innerHTML = "Fuel level high enough for launch";
                 cargoStatus.innerHTML = "Cargo mass too heavy for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-                launchStatus.style.color= "red";                     
-                
-            } else if(cargoMass < 100000 && fuelLevel < 100000) {
-                list.style.visibility = "visible";
-                pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
-                copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-                fuelStatus.innerHTML = "Fuel level too low for launch";                
-                cargoStatus.innerHTML = "Cargo mass low enough for launch";
+                launchStatus.style.color= "red";
+            }  
+                              
+
+               if (cargoMass > 10000 && fuelLevel < 10000) {
+                fuelStatus.innerHTML = "Fuel level too low for launch";
+                cargoStatus.innerHTML = "Cargo mass too heavy for launch";
                 launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-                launchStatus.style.color = "red";
+                launchStatus.style.color= "red"; 
+              }
+                       
         
-            } else {
+              if (cargoMass <= 10000 && fuelLevel >= 10000) {
                 list.style.visibility = "visible";
                 pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
                 copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
@@ -96,9 +104,12 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 cargoStatus.innerHTML = "Cargo mass low enough for launch";
                 launchStatus.innerHTML = "Shuttle is Ready for Launch";
                 launchStatus.style.color = "green";
+              }
             }
-        }
-    }           
+                
+            
+        
+             
           
         
   
