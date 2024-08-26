@@ -61,8 +61,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                  launchStatus.innerHTML = "Awaiting Information Before Launch";
                  pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
                  copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-                 fuelStatus.innerHTML = "Fuel level high enough for launch";
-                 cargoStatus.innerHTML = "Cargo mass low enough for launch";
+                
              
              
              if (fuelLevel < 10000) {
@@ -105,16 +104,12 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                 launchStatus.innerHTML = "Shuttle is Ready for Launch";
                 launchStatus.style.color = "green";
               }
-            }
+            }             
+                  
+                   
+        
                 
-            
-        
-             
-          
-        
-  
-               
-                         
+                       
            
         
   
